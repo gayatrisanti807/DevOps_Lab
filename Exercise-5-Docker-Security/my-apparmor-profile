@@ -1,0 +1,16 @@
+﻿#include <tunables/global>
+
+profile my-apparmor-profile flags=(attach_disconnected) {
+  #include <abstractions/base>
+  network inet stream,
+  network inet6 stream,
+  capability net_bind_service,
+  deny capability sys_admin,
+  /usr/bin/python3 ix,
+  /usr/local/bin/python3 ix,
+  /app/** r,
+  /usr/local/lib/python3.8/** mr,
+  /usr/local/lib/python3.8/site-packages/** mr,
+  deny /etc/shadow r,
+  deny /var/** w,
+}
